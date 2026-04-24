@@ -1,0 +1,33 @@
+<UserControl x:Class="MediBookDesktop.Views.ManageSpecialtiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="360" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="0,0,14,0">
+            <TextBlock Text="Manage specialties" Style="{StaticResource TitleText}" />
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Refresh" Command="{Binding RefreshCommand}" Style="{StaticResource SecondaryButton}" />
+                <Button Content="New" Command="{Binding NewCommand}" />
+                <Button Content="Delete selected" Command="{Binding DeleteCommand}" Style="{StaticResource DangerButton}" />
+            </StackPanel>
+            <TextBlock Text="{Binding Message}" Style="{StaticResource MutedText}" Margin="0,0,0,8" />
+            <DataGrid ItemsSource="{Binding Specialties}" SelectedItem="{Binding SelectedSpecialty}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Specialty" Binding="{Binding Name}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <Border Grid.Column="1" Style="{StaticResource Card}" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Specialty form" Style="{StaticResource SectionTitle}" />
+                <TextBlock Text="Name" FontWeight="SemiBold" />
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Content="Save specialty" Command="{Binding SaveCommand}" HorizontalAlignment="Stretch" Margin="0,8,0,0" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

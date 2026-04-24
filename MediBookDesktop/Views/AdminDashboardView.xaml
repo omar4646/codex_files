@@ -1,0 +1,34 @@
+<UserControl x:Class="MediBookDesktop.Views.AdminDashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Text="Admin dashboard" Style="{StaticResource TitleText}" />
+        <Button Content="Refresh" Command="{Binding RefreshCommand}" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" />
+        <UniformGrid Columns="4" Margin="0,12,0,0">
+            <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                <StackPanel>
+                    <TextBlock Text="{Binding TotalDoctors}" FontSize="34" FontWeight="SemiBold" Foreground="{StaticResource AccentDarkBrush}" />
+                    <TextBlock Text="Total doctors" Style="{StaticResource MutedText}" />
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                <StackPanel>
+                    <TextBlock Text="{Binding UpcomingAppointments}" FontSize="34" FontWeight="SemiBold" Foreground="{StaticResource AccentDarkBrush}" />
+                    <TextBlock Text="Upcoming appointments" Style="{StaticResource MutedText}" />
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                <StackPanel>
+                    <TextBlock Text="{Binding AppointmentsToday}" FontSize="34" FontWeight="SemiBold" Foreground="{StaticResource AccentDarkBrush}" />
+                    <TextBlock Text="Appointments today" Style="{StaticResource MutedText}" />
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="{Binding CancelledAppointments}" FontSize="34" FontWeight="SemiBold" Foreground="{StaticResource DangerBrush}" />
+                    <TextBlock Text="Cancelled appointments" Style="{StaticResource MutedText}" />
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+    </StackPanel>
+</UserControl>

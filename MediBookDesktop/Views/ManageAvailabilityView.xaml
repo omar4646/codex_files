@@ -1,0 +1,58 @@
+<UserControl x:Class="MediBookDesktop.Views.ManageAvailabilityView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Manage availability" Style="{StaticResource TitleText}" />
+            <Border Style="{StaticResource Card}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0,0,12,0">
+                        <TextBlock Text="Doctor" FontWeight="SemiBold" />
+                        <ComboBox ItemsSource="{Binding Doctors}" SelectedItem="{Binding SelectedDoctor}" DisplayMemberPath="FullName" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="0,0,12,0">
+                        <TextBlock Text="Date" FontWeight="SemiBold" />
+                        <DatePicker SelectedDate="{Binding SelectedDate}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Margin="0,0,12,0">
+                        <TextBlock Text="Start" FontWeight="SemiBold" />
+                        <TextBox Text="{Binding StartTimeText, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" Margin="0,0,12,0">
+                        <TextBlock Text="End" FontWeight="SemiBold" />
+                        <TextBox Text="{Binding EndTimeText, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="4" VerticalAlignment="Center">
+                        <Button Content="Add slot" Command="{Binding AddSlotCommand}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Refresh" Command="{Binding RefreshCommand}" Style="{StaticResource SecondaryButton}" />
+                <Button Content="Mark unavailable" Command="{Binding MarkUnavailableCommand}" Style="{StaticResource DangerButton}" />
+            </StackPanel>
+            <TextBlock Text="{Binding Message}" Style="{StaticResource MutedText}" Margin="0,0,0,8" />
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Slots}" SelectedItem="{Binding SelectedSlot}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding StartTime, StringFormat='{}{0:MMM d, yyyy}'}" Width="160" />
+                <DataGridTextColumn Header="Start" Binding="{Binding StartTime, StringFormat='{}{0:h:mm tt}'}" Width="120" />
+                <DataGridTextColumn Header="End" Binding="{Binding EndTime, StringFormat='{}{0:h:mm tt}'}" Width="120" />
+                <DataGridCheckBoxColumn Header="Booked" Binding="{Binding IsBooked}" Width="90" />
+                <DataGridCheckBoxColumn Header="Available" Binding="{Binding IsAvailable}" Width="100" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

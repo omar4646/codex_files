@@ -1,0 +1,54 @@
+<UserControl x:Class="MediBookDesktop.Views.PatientDashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Patient dashboard" Style="{StaticResource TitleText}" />
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <Button Content="Book new appointment" Command="{Binding BookNewCommand}" />
+                <Button Content="View all appointments" Command="{Binding MyAppointmentsCommand}" Style="{StaticResource SecondaryButton}" />
+                <Button Content="Refresh" Command="{Binding RefreshCommand}" Style="{StaticResource SecondaryButton}" />
+            </StackPanel>
+
+            <TextBlock Text="{Binding Message}" Style="{StaticResource MutedText}" />
+            <TextBlock Text="Upcoming appointments" Style="{StaticResource SectionTitle}" />
+            <DataGrid ItemsSource="{Binding UpcomingAppointments}" Height="220">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding AppointmentCode}" Width="90" />
+                    <DataGridTextColumn Header="Doctor" Binding="{Binding Doctor.FullName}" Width="*" />
+                    <DataGridTextColumn Header="Specialty" Binding="{Binding Doctor.Specialty}" Width="150" />
+                    <DataGridTextColumn Header="Date/time" Binding="{Binding AppointmentDateTime, StringFormat='{}{0:MMM d, yyyy h:mm tt}'}" Width="190" />
+                    <DataGridTextColumn Header="Location" Binding="{Binding Doctor.Location}" Width="180" />
+                    <DataGridTemplateColumn Header="Status" Width="110">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding Status, Converter={StaticResource StatusBrushConverter}}" CornerRadius="4" Padding="8,3" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Status}" Foreground="White" FontWeight="SemiBold" />
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Past and closed appointments" Style="{StaticResource SectionTitle}" Margin="0,18,0,8" />
+            <DataGrid ItemsSource="{Binding PastAppointments}" Height="260">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding AppointmentCode}" Width="90" />
+                    <DataGridTextColumn Header="Doctor" Binding="{Binding Doctor.FullName}" Width="*" />
+                    <DataGridTextColumn Header="Date/time" Binding="{Binding AppointmentDateTime, StringFormat='{}{0:MMM d, yyyy h:mm tt}'}" Width="190" />
+                    <DataGridTextColumn Header="Reason" Binding="{Binding ReasonForVisit}" Width="220" />
+                    <DataGridTemplateColumn Header="Status" Width="110">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding Status, Converter={StaticResource StatusBrushConverter}}" CornerRadius="4" Padding="8,3" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Status}" Foreground="White" FontWeight="SemiBold" />
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

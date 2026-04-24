@@ -1,0 +1,16 @@
+bin/
+obj/
+.vs/
+.dotnet/
+*.user
+*.db
+*.db-shm
+*.db-wal
+TestResults/
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.db
+*.sqlite
